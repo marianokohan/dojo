@@ -1,12 +1,3 @@
-tags
-*.sw*
-*.log
+package-lock.json
+node_modules
 .DS_Store
-*.err
-.idea/
-*.iml
-node_modules/
-coverage/
-*.orig
-all.zip
-merged_keys.po
