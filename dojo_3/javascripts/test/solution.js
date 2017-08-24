@@ -38,6 +38,10 @@ describe("bomberman", () => {
         it.skip("leaves a boom next to a brick, the boom explotes and the bricks disappears", () => {
             /* TODO - idea:
               var bomb = bomber.leavesBomb()
+              modelar tick, explotion -> fragment
+                - cell -> "damaged(fragment)"
+                  -> "content.bumpsInto(fragment)", pero declarado para Wall
+                      => mensaje "destroy"
             */
         });
 
