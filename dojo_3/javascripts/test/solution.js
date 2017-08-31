@@ -2,7 +2,7 @@ const chai = require('chai');
 
 const Bomber = require('../bomber');
 const Cell = require('../cell');
-const Something = require('../something');
+const Wall = require('../wall');
 const Enemy = require('../enemy');
 
 describe("bomberman", () => {
@@ -19,30 +19,33 @@ describe("bomberman", () => {
         it("steps into a cell which is busy with an object then it doesn't move and throw an exception", () => {
             var bornPlace = new Cell();
             var bomber = new Bomber( bornPlace );
-            var here = new Cell( new Something() );
+            var here = new Cell( new Wall() );
             chai.assert.throws( () => {
                 bomber.stepsIn( here );
             });
-            //TODO: posible assert de estar en "bornPlace"
+            chai.assert.equal( bomber.isIn(bornPlace), true);
         });
 
-        it.skip("steps into a cell which is busy with an enemy then it dies", () => {
+        it("steps into a cell which is busy with an enemy then it dies", () => {
           var bornPlace = new Cell();
           var bomber = new Bomber( bornPlace );
           var here = new Cell( new Enemy() );
           bomber.stepsIn( here );
           chai.assert.equal( bomber.isAlive(), false);
-          //TODO: mensaje "isDead" en true -> por completitud
+          chai.assert.equal( bomber.isDead(), true);
         });
 
-        it.skip("leaves a boom next to a brick, the boom explotes and the bricks disappears", () => {
-            /* TODO - idea:
-              var bomb = bomber.leavesBomb()
-              modelar tick, explotion -> fragment
-                - cell -> "damaged(fragment)"
-                  -> "content.bumpsInto(fragment)", pero declarado para Wall
-                      => mensaje "destroy"
-            */
+        it("leaves a bomb next to a wall, the bomb explotes and the wall disappears", () => {
+            var bornPlace = new Cell();
+            var bomber = new Bomber( bornPlace );
+            var bombedCell = new Cell( new Wall() );
+            chai.assert.equal( bombedCell.emptyContent(), false);
+            var bomb = bomber.leavesBomb()
+            bomb.tick();
+            var explotion = bomb.tick();
+            var fragment = explotion.getFragment();
+            bombedCell.damaged(fragment);
+            chai.assert.equal( bombedCell.emptyContent(), true);
         });
 
         it.skip("throws a boom to a brick, the boom explotes and the bricks disappears", () => {
