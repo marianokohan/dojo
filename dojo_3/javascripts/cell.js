@@ -1,4 +1,3 @@
-
 const Empty = require('./empty');
 
 function Cell(content) {
@@ -15,9 +14,7 @@ Cell.prototype.emptyContent = function () {
 }
 
 Cell.prototype.damaged = function(fragment) {
-  if (this._content.destroyed(fragment)) {
-    this._content = new Empty();
-  }
+  this._content = this._content.destroy(fragment);
 }
 
 module.exports = Cell;
