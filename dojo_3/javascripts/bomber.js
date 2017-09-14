@@ -1,8 +1,10 @@
 const Bomb = require('./bomb');
 const Trajectory = require('./trajectory');
+const Empty = require('./empty');
 
 function Bomber(bornPlace) {
     this._location = bornPlace;
+    bornPlace._content = this; //TODO: esto deberia ser de otra manera
 }
 
 Bomber.prototype.stepsIn = function(cell) {
@@ -32,6 +34,11 @@ Bomber.prototype.leavesBomb = function() {
 
 Bomber.prototype.throwsBomb = function (cell) {
   return new Trajectory(this._location, cell);
+}
+
+Bomber.prototype.destroy = function(fragment) {
+  this.kill();
+  return new Empty();
 }
 
 module.exports = Bomber;

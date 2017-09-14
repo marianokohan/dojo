@@ -59,7 +59,7 @@ describe("bomberman", () => {
           chai.assert.equal( wallCell.emptyContent(), true);
         });
 
-        it.skip("leaves a bomb with 2 wall around, the bomb explotes and destroy with radious 1", () => {
+        it("leaves a bomb with 2 wall around, the bomb explotes and destroy with radious 1", () => {
             var bornPlace = new Cell();
             var bomber = new Bomber( bornPlace );
             var wallCell1 = new Cell( new Wall() );
@@ -86,7 +86,7 @@ describe("bomberman", () => {
             chai.assert.equal( wallCell1.emptyContent(), true);
             chai.assert.equal( wallCell2.emptyContent(), true);
             chai.assert.equal( bornPlace.emptyContent(), true);
-            chai.assert.equal( bomber.isAlive(), false); //TODO: falta este caso
+            chai.assert.equal( bomber.isAlive(), false);
             chai.assert.equal( bomber.isDead(), true);
         });
 
